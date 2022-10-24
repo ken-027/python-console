@@ -1,10 +1,8 @@
-from ast import operator
-from calendar import c
-from math import prod, remainder
 from modules.system import *
+from modules.app import App
 
 
-class Calculator:
+class Calculator(App):
     app_name = 'Calculator'
 
     operation_msg = {
@@ -12,7 +10,7 @@ class Calculator:
         "s": "Difference",
         "m": "Product",
         "d": "Division",
-        "s": "Remainder"
+        "o": "Remainder"
     }
 
     def multiply(numbers):
@@ -42,14 +40,14 @@ class Calculator:
     def modulus(numbers):
         remainder = None
         for num in numbers:
-            remainder = num if remainder == None else remainder / num
+            remainder = num if remainder == None else remainder % num
         return remainder
 
-    def app():
+    def start():
         clear()
         cmd = ''
 
-        cout('Calculator App')
+        cout(f'Welcome {Calculator.app_name} App')
         space()
 
         rows = int(cin('Enter numbers you want to operate'))
@@ -58,7 +56,7 @@ class Calculator:
         entered_number = []
 
         for i in num_to_operate:
-            entered_number.append(float(cin(f'Enter number {i + 1}')))
+            entered_number.append(int(cin(f'Enter number {i + 1}')))
 
         space()
         cout('[A]Add', 'success')
@@ -100,4 +98,4 @@ class Calculator:
             space(2)
 
             if cmd in ['-r', 'restart']:
-                Calculator.app()
+                Calculator.start()
