@@ -7,7 +7,7 @@ from random import randint
 class RockPaperScissors(App):
     app_name = "Rock Paper Scissors"
     stats = {
-        "ai": 0,
+        "computer": 0,
         "user": 0
     }
     rps_command = {
@@ -17,10 +17,15 @@ class RockPaperScissors(App):
     }
 
     def who_is_winner():
-        is_user_win = RockPaperScissors.stats['user'] > RockPaperScissors.stats['ai']
-        winner = 'You' if is_user_win else 'Computer'
+        user = RockPaperScissors.stats['user']
+        computer = RockPaperScissors.stats['computer']
+        
+        if user == computer:
+            return cout('No one win the match', 'info')
+        
+        winner = 'You' if user > computer else 'Computer'
         cout(f'{winner} Won the match!',
-             'success' if is_user_win else 'fail')
+             'success' if user > computer else 'fail')
 
     def round_match(user_command, ai_command):
         user_command = RockPaperScissors.rps_command.get(user_command)
@@ -30,7 +35,7 @@ class RockPaperScissors(App):
         elif user_command == ai_command:
             cout('No one win', 'info')
         else:
-            RockPaperScissors.stats['ai'] += 1
+            RockPaperScissors.stats['computer'] += 1
             cout('try again!', 'fail')
 
     def start():
@@ -48,7 +53,7 @@ class RockPaperScissors(App):
             cout(f'Remaining attempt: {attempt}')
             cout('Standing')
             cout(
-                f'User: {RockPaperScissors.stats["user"]} \t Computer: {RockPaperScissors.stats["ai"]}', 'info')
+                f'User: {RockPaperScissors.stats["user"]} \t Computer: {RockPaperScissors.stats["computer"]}', 'info')
             attempt -= 1
 
             user_command = ''

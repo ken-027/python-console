@@ -50,8 +50,8 @@ def main():
         cout('Please enter a valid number!', 'fail')
         cin()
         main()
-    except:
-        cout('Error catch application exited!', 'fail')
+    # except:
+    #     cout('Error catch application exited!', 'fail')
 
 
 main()
